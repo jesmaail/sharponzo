@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sharponzo.GraphicalInterfac
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sharponzo.Logic", "Sharponzo.Logic\Sharponzo.Logic.csproj", "{87DD9B4C-18C3-4278-AD38-195A06C6F3A7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sharponzo.Test", "Sharponzo.Test\Sharponzo.Test.csproj", "{22D89BDC-884D-4A0C-8B5A-1C9389209A53}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{87DD9B4C-18C3-4278-AD38-195A06C6F3A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87DD9B4C-18C3-4278-AD38-195A06C6F3A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{87DD9B4C-18C3-4278-AD38-195A06C6F3A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22D89BDC-884D-4A0C-8B5A-1C9389209A53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22D89BDC-884D-4A0C-8B5A-1C9389209A53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22D89BDC-884D-4A0C-8B5A-1C9389209A53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22D89BDC-884D-4A0C-8B5A-1C9389209A53}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
