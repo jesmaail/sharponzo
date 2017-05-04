@@ -17,6 +17,59 @@ namespace Sharponzo
             var accountId = accounts[0].Id;
 
             var transactions = api.GetTransactions(accountId).Result;
+
+            var balance = api.GetBalance(accountId).Result;
+
+        }
+
+        private static void GetAllPayments()
+        {
+            throw new NotImplementedException();
+        }
+
+        private static void GetAllTopups()
+        {
+            throw new NotImplementedException();
+        }
+
+        private static void GetCurrentBalance()
+        {
+            throw new NotImplementedException();
+        }
+
+        private static void GetAccountHolder()
+        {
+            throw new NotImplementedException();
+        }
+
+        private static void GetAllMerchantNames()
+        {
+            throw new NotImplementedException();
+        }
+
+        private static void GetCategories()
+        {
+            throw new NotImplementedException();
+        }
+
+        private static void GetPaymentsByMerchant(string merchantName)
+        {
+            throw new NotImplementedException();   
+        }
+
+        private static void GetPaymentsByCategory(string category)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static void GetPaymentsByDate(DateTime start, DateTime end)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static void GetPaymentsByDate(DateTime date)
+        {
+            throw new NotImplementedException();
         }
 
 
