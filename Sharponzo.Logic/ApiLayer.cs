@@ -61,15 +61,15 @@ namespace Sharponzo
             //return await response.Content.ReadAsStringAsync();
         }
 
-        public async Task<string> GetBalance(string accountId)
+        public async Task<Balance> GetBalance(string accountId)
         {
             var response = await _httpClient.GetAsync($"/balance?account_id=" + accountId);
             if (!response.IsSuccessStatusCode)
             {
                 throw new Exception();
             }
-
-            return await response.Content.ReadAsStringAsync();
+            var body = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<Balance>(body);
         }
     }
 }
