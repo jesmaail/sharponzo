@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Sharponzo.MonzoTypes;
@@ -50,15 +48,17 @@ namespace Sharponzo
             return await response.Content.ReadAsStringAsync();
         }
 
-        public async Task<string> GetTransactions(string accountId)
+        public async Task<IList<Transaction>> GetTransactions(string accountId)
         {
             var response = await _httpClient.GetAsync($"/transactions?expand[]=merchant&account_id=" + accountId);
             if (!response.IsSuccessStatusCode)
             {
                 throw new Exception();
             }
+            var body = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<TransactionList>(body).Transactions;
 
-            return await response.Content.ReadAsStringAsync();
+            //return await response.Content.ReadAsStringAsync();
         }
 
         public async Task<string> GetBalance(string accountId)

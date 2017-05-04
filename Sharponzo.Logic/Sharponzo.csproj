@@ -49,6 +49,9 @@
     <Compile Include="ApiLayer.cs" />
     <Compile Include="MonzoTypes\Account.cs" />
     <Compile Include="MonzoTypes\AccountList.cs" />
+    <Compile Include="MonzoTypes\Merchant.cs" />
+    <Compile Include="MonzoTypes\Transaction.cs" />
+    <Compile Include="MonzoTypes\TransactionList.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

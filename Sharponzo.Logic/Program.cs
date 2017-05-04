@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
 
 namespace Sharponzo
 { 
@@ -21,8 +14,9 @@ namespace Sharponzo
             var api = new ApiLayer(access);
 
             var accounts = api.GetAccounts().Result;
+            var accountId = accounts[0].Id;
 
-            var whoAmI = api.WhoAmI().Result;
+            var transactions = api.GetTransactions(accountId).Result;
         }
 
 
@@ -31,7 +25,7 @@ namespace Sharponzo
         {
             var inputStream = Console.OpenStandardInput(READLINE_BUFFER_SIZE);
             var bytes = new byte[READLINE_BUFFER_SIZE];
-            var outputLength = inputStream.Read(bytes, 0, READLINE_BUFFER_SIZE);
+            inputStream.Read(bytes, 0, READLINE_BUFFER_SIZE);
 
             // The Carriage return gets included in the resulting string, so needs to be removed
             var result = Encoding.Default.GetString(bytes);
