@@ -8,8 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace Sharponzo.Logic
-{
+namespace Sharponzo
+{ 
     public class Program
     {
         private const int READLINE_BUFFER_SIZE = 290;
@@ -20,7 +20,9 @@ namespace Sharponzo.Logic
             var access = ReadLine();
             var api = new ApiLayer(access);
 
-            var result = api.GetAccounts().Result;
+            var accounts = api.GetAccounts().Result;
+
+            var whoAmI = api.WhoAmI().Result;
         }
 
 
