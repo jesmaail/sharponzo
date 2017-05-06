@@ -13,7 +13,7 @@ namespace Sharponzo.MonzoTypes
         public int Amount { get; set; }
 
         [JsonProperty("currency")]
-        public string Currecy { get; set; }
+        public string Currency { get; set; }
 
         [JsonProperty("spend_today")]
         public int SpendToday { get; set; }

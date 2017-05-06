@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using System.Text;
+using Sharponzo.MonzoTypes;
 
 namespace Sharponzo
 { 
@@ -7,34 +11,44 @@ namespace Sharponzo
     {
         private const int READLINE_BUFFER_SIZE = 290;
 
+        private static ApiLayer _api;
+
+        private static string _accountId;
+        private static IList<Account> _accounts;
+        private static IList<Transaction> _transactions;
+        private static Balance _balance;
+
         public static void Main()
         {
             Console.WriteLine("Please enter Monzo Access Token: ");
             var access = ReadLine();
-            var api = new ApiLayer(access);
+            _api = new ApiLayer(access);
 
-            var accounts = api.GetAccounts().Result;
-            var accountId = accounts[0].Id;
+            _accounts = _api.GetAccounts().Result;
+            _accountId = _accounts[0].Id;
+            _transactions = _api.GetTransactions(_accountId).Result;
+            _balance = _api.GetBalance(_accountId).Result;
 
-            var transactions = api.GetTransactions(accountId).Result;
+            var payments = GetAllPayments();
+            var topups = GetAllTopups();
 
-            var balance = api.GetBalance(accountId).Result;
-
+            var currentBalance = GetCurrentBalance();
         }
 
-        private static void GetAllPayments()
+        private static List<Transaction> GetAllPayments()
         {
-            throw new NotImplementedException();
+            return _transactions.Where(transaction => !transaction.IsLoad).ToList();
         }
 
-        private static void GetAllTopups()
+        private static List<Transaction> GetAllTopups()
         {
-            throw new NotImplementedException();
+            return _transactions.Where(transaction => transaction.IsLoad).ToList();
         }
 
-        private static void GetCurrentBalance()
+        private static string GetCurrentBalance()
         {
-            throw new NotImplementedException();
+            var value = (double)_balance.Amount / 100;
+            return value.ToString("C", CultureInfo.CurrentCulture);
         }
 
         private static void GetAccountHolder()

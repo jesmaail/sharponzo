@@ -33,6 +33,6 @@ namespace Sharponzo.MonzoTypes
         public string Category { get; set; }
 
         [JsonProperty("is_load")]
-        public string IsLoad { get; set; }
+        public bool IsLoad { get; set; }
     }
 }
