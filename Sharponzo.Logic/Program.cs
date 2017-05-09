@@ -51,9 +51,9 @@ namespace Sharponzo
             return value.ToString("C", CultureInfo.CurrentCulture);
         }
 
-        private static void GetAccountHolder()
+        private static string GetAccountHolder()
         {
-            throw new NotImplementedException();
+            return _accounts[0].Name;
         }
 
         private static void GetAllMerchantNames()
