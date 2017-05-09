@@ -39,6 +39,14 @@ namespace Sharponzo
 
             var tescoPayments = GetPaymentsByMerchant("tesco");
             var groceryPayments = GetPaymentsByCategory("groceries");
+
+
+            var startOfWeek = DateTime.Now.StartOfWeek(DayOfWeek.Monday);
+            var endOfWeek = startOfWeek.AddDays(6);
+            var dateWithTransaction = new DateTime(2017, 05, 08);
+
+            var paymentsThisWeek = GetPaymentsByDate(startOfWeek, endOfWeek);
+            var paymentsOnDate = GetPaymentsByDate(dateWithTransaction);
         }
 
         private static IEnumerable<Transaction> GetAllPayments()
@@ -100,12 +108,14 @@ namespace Sharponzo
 
         private static IEnumerable<Transaction> GetPaymentsByDate(DateTime start, DateTime end)
         {
-            throw new NotImplementedException();
+            return GetAllPayments()
+                .Where(payment => payment.Date > start && payment.Date < end).ToList();
         }
 
         private static IEnumerable<Transaction> GetPaymentsByDate(DateTime date)
         {
-            throw new NotImplementedException();
+            return GetAllPayments()
+                .Where(payment => payment.Date.Date == date.Date).ToList();
         }
 
 
@@ -153,5 +163,21 @@ namespace Sharponzo
         //        return ((dynamic) responseData).access_token;
         //    }
         //}
+    }
+
+    // Needs some refactoring
+    // Also need a similar way to take the start and end of a given month
+    // Have it pass in the DateTime dt also to get the start of any given week.
+    public static class DateTimeExtensions
+    {
+        public static DateTime StartOfWeek(this DateTime dt, DayOfWeek startOfWeek)
+        {
+            var diff = dt.DayOfWeek - startOfWeek;
+            if (diff < 0)
+            {
+                diff += 7;
+            }
+            return dt.AddDays(-1 * diff).Date;
+        }
     }
 }
