@@ -35,6 +35,10 @@ namespace Sharponzo
 
             var accountHolder = GetAccountHolder();
             var merchantNames = GetAllMerchantNames();
+            var categories = GetCategories();
+
+            var tescoPayments = GetPaymentsByMerchant("tesco");
+            var groceryPayments = GetPaymentsByCategory("groceries");
         }
 
         private static IEnumerable<Transaction> GetAllPayments()
@@ -61,34 +65,45 @@ namespace Sharponzo
         private static IEnumerable<string> GetAllMerchantNames()
         {
             var result = new List<string>();
-
             var merchants = GetAllPayments().Select(payment => payment.Merchant.Name).ToList();
-
             result.AddRange(merchants.Distinct());
             return result;
         }
 
-        private static void GetCategories()
+        private static IEnumerable<string> GetCategories()
+        {
+            var result = new List<string>();
+            var categories = GetAllPayments().Select(payment => payment.Category).ToList();
+            result.AddRange(categories.Distinct());
+            return result;
+        }
+
+        private static IEnumerable<Transaction> GetPaymentsByMerchant(string merchantName)
+        {
+            return GetAllPayments()
+                .Where(payment => string.Equals(
+                    payment.Merchant.Name, 
+                    merchantName,
+                    StringComparison.CurrentCultureIgnoreCase))
+                .ToList();
+        }
+
+        private static IEnumerable<Transaction> GetPaymentsByCategory(string category)
+        {
+            return GetAllPayments()
+                .Where(payment => string.Equals(
+                    payment.Category, 
+                    category, 
+                    StringComparison.CurrentCultureIgnoreCase))
+                .ToList();
+        }
+
+        private static IEnumerable<Transaction> GetPaymentsByDate(DateTime start, DateTime end)
         {
             throw new NotImplementedException();
         }
 
-        private static void GetPaymentsByMerchant(string merchantName)
-        {
-            throw new NotImplementedException();   
-        }
-
-        private static void GetPaymentsByCategory(string category)
-        {
-            throw new NotImplementedException();
-        }
-
-        private static void GetPaymentsByDate(DateTime start, DateTime end)
-        {
-            throw new NotImplementedException();
-        }
-
-        private static void GetPaymentsByDate(DateTime date)
+        private static IEnumerable<Transaction> GetPaymentsByDate(DateTime date)
         {
             throw new NotImplementedException();
         }
