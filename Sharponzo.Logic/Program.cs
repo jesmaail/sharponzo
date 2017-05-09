@@ -31,16 +31,18 @@ namespace Sharponzo
 
             var payments = GetAllPayments();
             var topups = GetAllTopups();
-
             var currentBalance = GetCurrentBalance();
+
+            var accountHolder = GetAccountHolder();
+            var merchantNames = GetAllMerchantNames();
         }
 
-        private static List<Transaction> GetAllPayments()
+        private static IEnumerable<Transaction> GetAllPayments()
         {
             return _transactions.Where(transaction => !transaction.IsLoad).ToList();
         }
 
-        private static List<Transaction> GetAllTopups()
+        private static IEnumerable<Transaction> GetAllTopups()
         {
             return _transactions.Where(transaction => transaction.IsLoad).ToList();
         }
@@ -56,9 +58,14 @@ namespace Sharponzo
             return _accounts[0].Name;
         }
 
-        private static void GetAllMerchantNames()
+        private static IEnumerable<string> GetAllMerchantNames()
         {
-            throw new NotImplementedException();
+            var result = new List<string>();
+
+            var merchants = GetAllPayments().Select(payment => payment.Merchant.Name).ToList();
+
+            result.AddRange(merchants.Distinct());
+            return result;
         }
 
         private static void GetCategories()
