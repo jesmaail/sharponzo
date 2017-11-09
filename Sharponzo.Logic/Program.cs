@@ -5,6 +5,10 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using Sharponzo.MonzoTypes;
+using System.Threading.Tasks;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using Newtonsoft.Json;
 
 namespace Sharponzo
 { 
@@ -19,6 +23,19 @@ namespace Sharponzo
         private static IList<Transaction> _transactions;
         private static Balance _balance;
 
+        // TODO:
+        //  - Split out the logic in here into seperate objects!
+        //      - <Filter> object to do the GetPaymentsBy methods
+        //      - <Monzo> object to handle GetAllPayments() GetAllTopups() etc.
+
+        //  - Handle the filters/requests/etc. in the command line rather than hard coding them!
+        //      - Prettify the outputs of these requests
+        //      - Help option to show available commands
+
+        //  - Split out (and refactor) the DateTime extension
+
+        //  - Split out the MonzoAccessToken logic and ReadLine()
+        //      - Will help reuse this code as the logic-side of a web application!
         public static void Main()
         {
             Console.WriteLine("Please enter Monzo Access Token: ");
@@ -196,40 +213,7 @@ namespace Sharponzo
             // The Carriage return gets included in the resulting string, so needs to be removed
             var result = Encoding.Default.GetString(bytes);
             return result.Substring(0, result.Length - 2);
-        }
-
-        // Need to think about doing it as web app, Monzo requires a web kickback
-        //public static async Task<string> Authentication()
-        //{
-        //    var clientId = "";
-        //    var clientSecret = "";
-        //    var baseUrl = "";
-        //    var accessToken = "";
-
-        //    // GetAccessToken (async task)
-        //    using (var client = new HttpClient())
-        //    {
-        //        client.BaseAddress = new Uri(baseUrl);
-
-        //        // Set Response to be JSON
-        //        client.DefaultRequestHeaders.Accept.Clear();
-        //        client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-        //        // Set data to POST
-        //        var dataToPost = new List<KeyValuePair<string, string>>();
-        //        dataToPost.Add(new KeyValuePair<string, string>("grantType", "client_credentials"));
-        //        dataToPost.Add(new KeyValuePair<string, string>("clientId", clientId));
-        //        dataToPost.Add(new KeyValuePair<string, string>("clientSecret", clientSecret));
-        //        var content = new FormUrlEncodedContent(dataToPost);
-                
-        //        // Post the data and get response
-        //        var response = await client.PostAsync("Token", content);
-        //        var jsonString = await response.Content.ReadAsStringAsync();
-        //        var responseData = JsonConvert.DeserializeObject(jsonString);
-
-        //        return ((dynamic) responseData).access_token;
-        //    }
-        //}
+        }        
     }
 
     // Needs some refactoring
