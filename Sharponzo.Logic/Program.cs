@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Net;
 using System.Text;
 using Sharponzo.MonzoTypes;
 
@@ -40,13 +41,72 @@ namespace Sharponzo
             var tescoPayments = GetPaymentsByMerchant("tesco");
             var groceryPayments = GetPaymentsByCategory("groceries");
 
+            //var startOfWeek = DateTime.Now.StartOfWeek(DayOfWeek.Monday);
+            //var endOfWeek = startOfWeek.AddDays(6);
+            //var dateWithTransaction = new DateTime(2017, 05, 08);
+            //var paymentsThisWeek = GetPaymentsByDate(startOfWeek, endOfWeek);
+            //var paymentsOnDate = GetPaymentsByDate(dateWithTransaction);
+            //var spentThisWeek = GetPaymentsAmount(paymentsThisWeek);
+            
+            PrintStatementForMonth(06, 2017);
+            var weekBiggestSpend = new DateTime(2017, 06, 05);
+            var highestSpendDay = HighestSpendDayPerWeek(weekBiggestSpend);
+            var highestSpendAmount = GetPaymentsAmount(GetPaymentsByDate(highestSpendDay));
+            var formattedSpendAmount = $"{highestSpendAmount:C2}";
 
-            var startOfWeek = DateTime.Now.StartOfWeek(DayOfWeek.Monday);
-            var endOfWeek = startOfWeek.AddDays(6);
-            var dateWithTransaction = new DateTime(2017, 05, 08);
+            Console.WriteLine("Biggest spending day for week commencing " + weekBiggestSpend.ToString("dd MMM") + ": ");
+            Console.WriteLine(highestSpendDay.ToString("dddd MMM") + ": " + formattedSpendAmount);
+            var pause = ReadLine();
+        }
 
-            var paymentsThisWeek = GetPaymentsByDate(startOfWeek, endOfWeek);
-            var paymentsOnDate = GetPaymentsByDate(dateWithTransaction);
+        private static void PrintStatementForMonth(int month, int year)
+        {
+            var periodWeeks = new DateTime(year, month, 01).GetWeeksForMonth(DayOfWeek.Monday);
+            var periodPayments = new List<Transaction>();
+            foreach (var week in periodWeeks)
+            {
+                var paymentsForWeek = GetPaymentsByWeek(week);
+                periodPayments.AddRange(paymentsForWeek);
+
+                var amountForWeek = GetPaymentsAmount(paymentsForWeek);
+                Console.WriteLine(week.ToString("dd MMM") + " - " + week.AddDays(6).ToString("dd MMM") + ": " + amountForWeek);
+            }
+            var periodSpend = GetPaymentsAmount(periodPayments);
+            var formattedSpend = $"{periodSpend:C2}";
+            Console.WriteLine("Total for period: " + formattedSpend);
+        }
+
+        private static DateTime HighestSpendDayPerWeek(DateTime startOfWeek)
+        {
+            var max = 0.0;
+            var dayIndex = 0;
+
+            for (var i = 0; i < 7; i++)
+            {
+                var spend = GetSpendForDay(startOfWeek.AddDays(i));
+                if (!(spend > max)) continue;
+                max = spend;
+                dayIndex = i;
+            }
+
+            return startOfWeek.AddDays(dayIndex);
+        }
+
+        private static double GetSpendForDay(DateTime day)
+        {
+            var transactions = GetPaymentsByDate(day);
+            var amount = GetPaymentsAmount(transactions);
+
+            return amount;
+        }
+
+        private static double GetPaymentsAmount(IEnumerable<Transaction> transactions)
+        {
+            double amount = transactions.Sum(transaction => transaction.Amount);
+            amount = Math.Abs(amount);
+            amount = amount / 100;
+
+            return amount;
         }
 
         private static IEnumerable<Transaction> GetAllPayments()
@@ -106,18 +166,25 @@ namespace Sharponzo
                 .ToList();
         }
 
+        // Date Range
         private static IEnumerable<Transaction> GetPaymentsByDate(DateTime start, DateTime end)
         {
             return GetAllPayments()
                 .Where(payment => payment.Date > start && payment.Date < end).ToList();
         }
 
+        // Single Date
         private static IEnumerable<Transaction> GetPaymentsByDate(DateTime date)
         {
             return GetAllPayments()
                 .Where(payment => payment.Date.Date == date.Date).ToList();
         }
 
+        // Week
+        private static IEnumerable<Transaction> GetPaymentsByWeek(DateTime startOfWeek)
+        {
+            return GetPaymentsByDate(startOfWeek, startOfWeek.AddDays(6));
+        }
 
         // Required as the Monzo Access Token is massive!
         private static string ReadLine()
@@ -178,6 +245,24 @@ namespace Sharponzo
                 diff += 7;
             }
             return dt.AddDays(-1 * diff).Date;
+        }
+
+        public static IEnumerable<DateTime> GetWeeksForMonth(this DateTime month, DayOfWeek startOfWeek)
+        {
+            var weeks = new List<DateTime>();
+            var startOfMonth = new DateTime(month.Year, month.Month, 1);
+
+            var current = month.Month;
+            var week = startOfMonth.StartOfWeek(startOfWeek);
+
+            while (current == month.Month)
+            {
+                weeks.Add(week);
+                week = week.AddDays(7);
+                current = week.Month;
+            }
+
+            return weeks;
         }
     }
 }

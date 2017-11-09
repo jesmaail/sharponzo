@@ -10,7 +10,6 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Sharponzo.GraphicalInterface
@@ -20,9 +19,13 @@ namespace Sharponzo.GraphicalInterface
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        private readonly string _accessCode;
+        public MainWindow(string access)
         {
+            _accessCode = access;
             InitializeComponent();
+
+            txtName.Text = access;
         }
     }
 }

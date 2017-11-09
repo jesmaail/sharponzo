@@ -13,5 +13,6 @@ namespace Sharponzo.GraphicalInterface
     /// </summary>
     public partial class App : Application
     {
+
     }
 }
