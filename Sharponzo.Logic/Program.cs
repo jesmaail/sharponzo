@@ -17,14 +17,6 @@ namespace Sharponzo
         // TODO:
         //  - Unit test <Monzo> & <Filter> Objects
         //      - This can eliminate a lot of the code from Main()
-        //      - Use NUnit (need to NuGet that)
-
-        //  - <Calculator> for the commented out methods of
-        //      - SpendForDay()
-        //      - HighestSpendingDay()
-
-        //  - <PrettyPrint> for the commented out method PrintStatementForMonth()
-        //      - Also want more methods in this one of course
 
         //  - Handle the filters/requests/etc. in the command line rather than hard coding them!
         //      - Prettify the outputs of these requests
@@ -60,13 +52,14 @@ namespace Sharponzo
             var paymentsThisWeek = filter.GetPaymentsByDateRange(startOfWeek, endOfWeek);
             var paymentsOnDate = filter.GetPaymentsByDate(dateWithTransaction);
 
-            var spentThisWeek = GetPaymentsAmount(paymentsThisWeek);
+
+            var calculator = new Calculator(payments);
+            var spentThisWeek = calculator.GetPaymentsAmount(paymentsThisWeek);
+            var highestSpendDay = calculator.HighestSpendingDayInWeek(DateTime.Now.StartOfWeek(DayOfWeek.Monday));
+            var highestSpendAmount = calculator.GetPaymentsAmount(filter.GetPaymentsByDate(highestSpendDay));
+            var formattedSpendAmount = $"{highestSpendAmount:C2}";
 
             //PrintStatementForMonth(06, 2017);
-            //var weekBiggestSpend = new DateTime(2017, 06, 05);
-            //var highestSpendDay = HighestSpendDayPerWeek(weekBiggestSpend);
-            //var highestSpendAmount = GetPaymentsAmount(filter.GetPaymentsByDate(highestSpendDay));
-            //var formattedSpendAmount = $"{highestSpendAmount:C2}";
 
             //Console.WriteLine("Biggest spending day for week commencing " + weekBiggestSpend.ToString("dd MMM") + ": ");
             //Console.WriteLine(highestSpendDay.ToString("dddd MMM") + ": " + formattedSpendAmount);
@@ -88,39 +81,6 @@ namespace Sharponzo
         //    var periodSpend = GetPaymentsAmount(periodPayments);
         //    var formattedSpend = $"{periodSpend:C2}";
         //    Console.WriteLine("Total for period: " + formattedSpend);
-        //}
-
-        //private static DateTime HighestSpendDayPerWeek(DateTime startOfWeek)
-        //{
-        //    var max = 0.0;
-        //    var dayIndex = 0;
-
-        //    for (var i = 0; i < 7; i++)
-        //    {
-        //        var spend = GetSpendForDay(startOfWeek.AddDays(i));
-        //        if (!(spend > max)) continue;
-        //        max = spend;
-        //        dayIndex = i;
-        //    }
-
-        //    return startOfWeek.AddDays(dayIndex);
-        //}
-
-        //private static double GetSpendForDay(DateTime day)
-        //{
-        //    var transactions = GetPaymentsByDate(day);
-        //    var amount = GetPaymentsAmount(transactions);
-
-        //    return amount;
-        //}
-
-        private static double GetPaymentsAmount(IEnumerable<Transaction> transactions)
-        {
-            double amount = transactions.Sum(transaction => transaction.Amount);
-            amount = Math.Abs(amount);
-            amount = amount / 100;
-
-            return amount;
-        }      
+        //}    
     }    
 }

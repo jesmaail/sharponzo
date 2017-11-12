@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiLayer.cs" />
+    <Compile Include="Calculator.cs" />
     <Compile Include="Filter.cs" />
     <Compile Include="Helpers.cs" />
     <Compile Include="Monzo.cs" />
