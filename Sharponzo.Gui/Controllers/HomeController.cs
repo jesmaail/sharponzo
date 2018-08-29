@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Sharponzo.Gui.Models;
+using Sharponzo.OAuth;
 
 namespace Sharponzo.Gui.Controllers
 {
@@ -15,29 +15,11 @@ namespace Sharponzo.Gui.Controllers
             return View();
         }
 
-        public IActionResult About()
+        public IActionResult Authorisation()
         {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            var auth = new Auth();
+            auth.Authenticate();
+            throw new NotImplementedException();
         }
     }
 }
