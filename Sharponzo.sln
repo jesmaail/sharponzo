@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sharponzo.Logic", "Sharponz
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sharponzo.Gui", "Sharponzo.Gui\Sharponzo.Gui.csproj", "{06510D01-3139-4FAA-8D92-96CAF931C4B8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sharponzo.OAuth", "Sharponzo.OAuth\Sharponzo.OAuth.csproj", "{D8437562-3B53-4D08-B4B5-DE4F9BB87247}"
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -44,5 +46,17 @@ Global
 		{06510D01-3139-4FAA-8D92-96CAF931C4B8}.Release|x64.Build.0 = Release|Any CPU
 		{06510D01-3139-4FAA-8D92-96CAF931C4B8}.Release|x86.ActiveCfg = Release|Any CPU
 		{06510D01-3139-4FAA-8D92-96CAF931C4B8}.Release|x86.Build.0 = Release|Any CPU
+		{D8437562-3B53-4D08-B4B5-DE4F9BB87247}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8437562-3B53-4D08-B4B5-DE4F9BB87247}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8437562-3B53-4D08-B4B5-DE4F9BB87247}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D8437562-3B53-4D08-B4B5-DE4F9BB87247}.Debug|x64.Build.0 = Debug|Any CPU
+		{D8437562-3B53-4D08-B4B5-DE4F9BB87247}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D8437562-3B53-4D08-B4B5-DE4F9BB87247}.Debug|x86.Build.0 = Debug|Any CPU
+		{D8437562-3B53-4D08-B4B5-DE4F9BB87247}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8437562-3B53-4D08-B4B5-DE4F9BB87247}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8437562-3B53-4D08-B4B5-DE4F9BB87247}.Release|x64.ActiveCfg = Release|Any CPU
+		{D8437562-3B53-4D08-B4B5-DE4F9BB87247}.Release|x64.Build.0 = Release|Any CPU
+		{D8437562-3B53-4D08-B4B5-DE4F9BB87247}.Release|x86.ActiveCfg = Release|Any CPU
+		{D8437562-3B53-4D08-B4B5-DE4F9BB87247}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
