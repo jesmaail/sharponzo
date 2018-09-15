@@ -1,15 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Sharponzo.OAuth;
+using Microsoft.Extensions.Options;
+using Sharponzo.Models;
+using Sharponzo.Auth;
 
 namespace Sharponzo.Gui.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly Authorisation _auth;
+        private readonly ClientDetails _clientDetails;
+
+        public HomeController(IOptions<ClientDetails> clientDetails)
+        {
+            _clientDetails = clientDetails.Value ?? throw new ArgumentException(nameof(clientDetails));
+            _auth = new Authorisation(_clientDetails);
+        }
         public IActionResult Index()
         {
             return View();
@@ -17,9 +23,15 @@ namespace Sharponzo.Gui.Controllers
 
         public IActionResult Authorisation()
         {
-            var auth = new Auth();
-            auth.Authenticate();
-            throw new NotImplementedException();
+            var redirectUrl = _auth.GetAuthRequestUrl();
+            return Redirect(redirectUrl);
+        }
+
+        public IActionResult Callback(string code, string state)
+        {
+            var accessResponse = _auth.GetAccessCode(code, state);
+
+            return View("Index");
         }
     }
 }
