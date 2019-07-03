@@ -1,7 +1,13 @@
 # Sharponzo
 Right now, just a dummy project accessing the Monzo API, might grow into something more.
 
-## TODO
+
+## TODO: 
+
+__Become a nuget library for Monzo API.__
+
+
+## TODO (old, may actually use these still)
 - Remove the faff from default MVC views
 - Add back in DateTime extensions for Start/End of week and Weeks of a Month.
 - __Unit tests!__

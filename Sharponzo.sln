@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sharponzo.Gui", "Sharponzo.Gui\Sharponzo.Gui.csproj", "{06510D01-3139-4FAA-8D92-96CAF931C4B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sharponzo.Gui", "src\Sharponzo.Gui\Sharponzo.Gui.csproj", "{06510D01-3139-4FAA-8D92-96CAF931C4B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sharponzo.Models", "Sharponzo.Models\Sharponzo.Models.csproj", "{FC2ABB76-77D6-4536-A6D6-38285EB3BA46}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sharponzo.Models", "src\Sharponzo.Models\Sharponzo.Models.csproj", "{FC2ABB76-77D6-4536-A6D6-38285EB3BA46}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sharponzo.Auth", "Sharponzo.Auth\Sharponzo.Auth.csproj", "{A8E78E87-C243-4F70-898D-692B443B8C92}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sharponzo.Auth", "src\Sharponzo.Auth\Sharponzo.Auth.csproj", "{A8E78E87-C243-4F70-898D-692B443B8C92}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sharponzo.Logic", "Sharponzo.Logic\Sharponzo.Logic.csproj", "{92FB0C23-5909-4F97-B372-B22F6434DC11}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sharponzo", "src\Sharponzo\Sharponzo.csproj", "{92FB0C23-5909-4F97-B372-B22F6434DC11}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
