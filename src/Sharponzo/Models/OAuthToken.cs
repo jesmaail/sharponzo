@@ -2,7 +2,7 @@
 
 namespace Sharponzo.Models
 {
-    public class AccessResponse
+    public class OAuthToken
     {
         [JsonProperty("access_token")]
         public string AccessToken { get; set; }

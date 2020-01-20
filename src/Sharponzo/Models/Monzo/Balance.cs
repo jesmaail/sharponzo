@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Globalization;
 
-namespace Sharponzo.Models.MonzoTypes
+namespace Sharponzo.Models.Monzo
 {
     public class Balance
     {

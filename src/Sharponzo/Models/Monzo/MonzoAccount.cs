@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Sharponzo.Models.MonzoTypes
+namespace Sharponzo.Models.Monzo
 {
     public class MonzoAccount
     {

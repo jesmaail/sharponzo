@@ -17,9 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Sharponzo.Auth\Sharponzo.Auth.csproj" />
     <ProjectReference Include="..\Sharponzo\Sharponzo.csproj" />
-    <ProjectReference Include="..\Sharponzo.Models\Sharponzo.Models.csproj" />
   </ItemGroup>
 
 </Project>

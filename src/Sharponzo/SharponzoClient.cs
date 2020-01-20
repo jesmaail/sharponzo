@@ -1,16 +1,16 @@
-﻿using Sharponzo.Models.MonzoTypes;
+﻿using Sharponzo.Models.Monzo;
 using System.Collections.Generic;
 using RestSharp;
 using Newtonsoft.Json;
 using System.Linq;
 
-namespace Sharponzo.Logic
+namespace Sharponzo
 {
-    public class MonzoApi
+    public class SharponzoClient
     {
         private RestClient _client;
 
-        public MonzoApi(string accessToken)
+        public SharponzoClient(string accessToken)
         {
             _client = new RestClient("https://api.monzo.com");
             _client.AddDefaultHeader("Authorization", $"Bearer {accessToken}");

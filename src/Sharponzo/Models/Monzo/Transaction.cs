@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace Sharponzo.Models.MonzoTypes
+namespace Sharponzo.Models.Monzo
 {
     public class Transaction
     {
